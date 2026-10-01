@@ -5,6 +5,8 @@
 set -uo pipefail
 
 KIT="$(cd "$(dirname "$0")/.." && pwd)"
+# Windows Python cannot open Git Bash paths (/c/Users/...); hand it a C:/Users/... path instead.
+KIT_PY="$(cygpath -m "$KIT" 2>/dev/null || echo "$KIT")"
 GH="$(command -v gh || true)"
 [ -z "$GH" ] && [ -x "/c/Program Files/GitHub CLI/gh.exe" ] && GH="/c/Program Files/GitHub CLI/gh.exe"
 if [ -z "$GH" ]; then echo "sync-forks: GitHub CLI (gh) not found."; exit 1; fi
@@ -27,10 +29,10 @@ while IFS=$'\t' read -r fork upstream modified; do
     echo "| $fork | $upstream | **failed:** $msg |"; failed=$((failed+1))
   fi
 done < <(python -c "
-import json
-for f in json.load(open(r'$KIT/forks.json')):
+import json, sys
+for f in json.load(open(sys.argv[1] + '/forks.json')):
     print(f['fork'], f['upstream'], f.get('modified', False), sep='\t')
-" | tr -d '\r')
+" "$KIT_PY" | tr -d '\r')
 
 echo
 echo "**$ok synced, $skipped skipped, $failed failed.**"
