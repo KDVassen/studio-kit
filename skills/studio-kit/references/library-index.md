@@ -22,7 +22,7 @@ Verified 2026-10-01 against npm, GitHub and each repo's LICENSE file. Pinned ver
 | Marketing flourishes | Magic UI (free, MIT) on an island | Motion Primitives patterns; retrofit reduced motion |
 | Icons | Lucide via @lucide/astro or astro-icon | Tabler for gaps; Iconoir for finer strokes |
 | Charts (any platform) | Chart.js | ECharts for dashboards/maps; Bklit or visx on React islands |
-| Carousel | CSS scroll-snap row (patterns.md 12) | Embla once 9.0 stable ships; Swiper 14 only if the operator approves its index entry |
+| Carousel | CSS scroll-snap row (patterns.md 12) | Swiper 14 for looping, thumbnails or effects (budget: about 25 KB); Embla once 9.0 stable ships |
 | Lottie animation | Muted video loop | dotLottie player, lazy-loaded below the fold |
 
 ## UI components
@@ -282,6 +282,17 @@ Verified 2026-10-01 against npm, GitHub and each repo's LICENSE file. Pinned ver
 - **Reduced motion / a11y:** Browsers do not switch it off for reduced motion. You add one CSS rule.
 - **Size:** 0 KB · **Build cost:** Low for a fade, Medium for shared-element morphs
 - **Links:** https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API
+
+### Swiper — `reference` · `ship`
+
+- Touch slider and carousel with autoplay, pagination and a Web Component build; no dependencies.
+- **Why:** Stable, MIT and actively released, with an accessibility module on by default. The heaviest carousel checked: about 25 KB gzip with autoplay, a11y and navigation is 84% of the 30 KB page budget. Use it only when a brief needs looping, thumbnails or effects that a CSS scroll-snap row cannot do. It ships no pause control, so you must build one.
+- **Watch:** Approved by the operator 2026-10-01 after a library-scout check. Single maintainer; 9 stable releases since 2026-06-26 including a new major, so pin exactly and re-test before bumping. The loop-mode keyboard-trap fix only landed in 14.3.0.
+- **Install:** `npm i --save-exact swiper@14.3.0  # import Autoplay only behind the reduced-motion gate; build your own pause button`
+- **Licence:** MIT — Yes. Keep the MIT notice.
+- **Reduced motion / a11y:** No reduced-motion handling and no pause control anywhere in the package; autoplay does not pause on keyboard focus. Import Autoplay only when matchMedia allows motion, set speed to 0 under reduce, and add your own visible pause button (patterns.md pattern 6). The a11y module is on by default: labelled slides, buttons with Enter and Space.
+- **Size:** 20.8 KB gzip core; 25.3 KB with Autoplay, A11y and Navigation (measured with esbuild); CSS about 2 KB gzip. · **Build cost:** Medium
+- **Links:** https://swiperjs.com · https://github.com/nolimits4web/swiper
 
 ## WebGL, 3D and backgrounds
 

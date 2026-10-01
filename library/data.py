@@ -218,6 +218,14 @@ add(id="embla",name="Embla Carousel",cat="motion",url="https://www.embla-carouse
  a11y="v9 adds an accessibility plugin. Never autoplay without a visible pause control.",
  cost="Medium",tier="situational",fork="ref",forknote="",
  note="Stable 8.6.0 (2025-04-04) fails the 12-month rule, and 9.0 has been a release candidate since January 2026. Do not ship a pre-release to a client who owns it. Use the CSS scroll-snap row until 9.0 stable ships (library-scout, 2026-10-01).")
+add(id="swiper",name="Swiper",cat="motion",url="https://swiperjs.com",repo="https://github.com/nolimits4web/swiper",
+ what="Touch slider and carousel with autoplay, pagination and a Web Component build; no dependencies.",
+ why="Stable, MIT and actively released, with an accessibility module on by default. The heaviest carousel checked: about 25 KB gzip with autoplay, a11y and navigation is 84% of the 30 KB page budget. Use it only when a brief needs looping, thumbnails or effects that a CSS scroll-snap row cannot do. It ships no pause control, so you must build one.",
+ stack=["vanilla","React","Vue","Astro"],lic="MIT",lclass="permissive",handover="Yes. Keep the MIT notice.",
+ ver="14.3.0",rel="2026-09-28",stars="41.9k",size="20.8 KB gzip core; 25.3 KB with Autoplay, A11y and Navigation (measured with esbuild); CSS about 2 KB gzip.",
+ a11y="No reduced-motion handling and no pause control anywhere in the package; autoplay does not pause on keyboard focus. Import Autoplay only when matchMedia allows motion, set speed to 0 under reduce, and add your own visible pause button (patterns.md pattern 6). The a11y module is on by default: labelled slides, buttons with Enter and Space.",
+ cost="Medium",tier="situational",fork="ref",forknote="",
+ note="Approved by the operator 2026-10-01 after a library-scout check. Single maintainer; 9 stable releases since 2026-06-26 including a new major, so pin exactly and re-test before bumping. The loop-mode keyboard-trap fix only landed in 14.3.0.")
 add(id="dotlottie",name="dotLottie player",cat="motion",url="https://lottiefiles.com/dotlottie",repo="https://github.com/LottieFiles/dotlottie-web",
  what="Maintained Lottie animation player using a WASM engine.",
  why="For illustrated or mascot animations a client already owns as Lottie files. Heavy, so lazy-load below the fold and self-host the WASM. A short muted video is often cheaper.",

@@ -43,6 +43,13 @@ Pages (standard package: up to 5), inclusions, exclusions, revision rounds used 
 - [ ] **Enquiry delivery:** how does the client hear about a new enquiry? (stored in D1 by default; nothing notifies anyone yet)
 - [ ] **Content editing after handover:** how will the client edit their own content?
 
+## Budget exceptions
+
+Decision D14: any page over the 30 KB JavaScript budget (for example a React island) needs the operator's approval, recorded here first.
+
+| Date | Page | What and why | Size (gzip) | Approved by |
+|---|---|---|---|---|
+
 ## Design
 
 Canvas link, sign-off date, theme tokens and every computed contrast ratio.

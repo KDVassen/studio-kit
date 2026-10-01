@@ -207,7 +207,7 @@ Use the starter's form (`starter/src/components/EnquiryForm.astro` + `starter/wo
 
 ## 12. Carousel without a library: a scroll-snap row
 
-The default for galleries, testimonials and "recent work". Native touch swipe in about 96% of browsers, keyboard-scrollable, nothing to license or upgrade. A library (Embla once 9.0 is stable, or Swiper if the operator approves it) only for looping, thumbnails or effects this cannot do.
+The default for galleries, testimonials and "recent work". Native touch swipe in about 96% of browsers, keyboard-scrollable, nothing to license or upgrade. A library only for looping, thumbnails or effects this cannot do: Swiper 14 (in the index; about 25 KB, build your own pause button), or Embla once 9.0 is stable.
 
 ```astro
 <section class="sk-snap" aria-labelledby="work-h">

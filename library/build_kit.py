@@ -10,7 +10,8 @@ CATNAME = {c[0]: c[1] for c in CATS}
 FORK = ["animejs","autoanimate","babylon","basecoat","baseui","bklit","chartjs","daisyui","echarts","lenis",
         "lucide","magicui","motion","number-flow","r3f","reactaria","shadcn","tabler","threejs","visx"]
 REF = ["aceternity","astro-icon","astro-router","coss","css-bg","css-scroll","dotlottie","embla","gsap",
-       "headlessui","iconoir","locomotive","model-viewer","motionprimitives","radix","reactbits","view-transitions"]
+       "headlessui","iconoir","locomotive","model-viewer","motionprimitives","radix","reactbits","view-transitions",
+       "swiper"]  # swiper: added 2026-10-01 after library-scout, operator approved
 STUDY_ONLY = {"aceternity": "Licence forbids redistributing source files; rebuild effects with Motion.",
               "reactbits": "MIT + Commons Clause forbids sublicensing; cannot enter client repos or the kit.",
               "coss": "Root licence is AGPL; only apps/origin and apps/ui are MIT. Study patterns only.",
@@ -40,6 +41,7 @@ INSTALL = {
  "astro-icon": "npm i astro-icon@1.2.0 @iconify-json/lucide @iconify-json/tabler",
  "astro-router": "built into astro: import { ClientRouter } from 'astro:transitions'",
  "dotlottie": "npm i @lottiefiles/dotlottie-web@0.80.0  # self-host the WASM",
+ "swiper": "npm i --save-exact swiper@14.3.0  # import Autoplay only behind the reduced-motion gate; build your own pause button",
  "embla": "do not install yet: 8.6.0 fails the 12-month rule and 9.0 is still a release candidate; use the scroll-snap row (patterns.md 12)",
  "gsap": "npm i gsap@3.15.0  # flagged licence: carve out of client sublicensing",
  "headlessui": "npm i @headlessui/react@2.2.10",
@@ -72,7 +74,7 @@ for status, ids in (("fork", FORK), ("reference", REF)):
 a = dict(BY["a11y-astro"]); a.update(status="starter", use="ship", use_note=STARTER_EXTRA["note"],
                                      install="npm i accessible-astro-components@5.8.0", category=CATNAME["ui"])
 entries.append(a)
-assert len([e for e in entries if e["status"] == "fork"]) == 20 and len([e for e in entries if e["status"] == "reference"]) == 17
+assert len([e for e in entries if e["status"] == "fork"]) == 20 and len([e for e in entries if e["status"] == "reference"]) == 18
 
 io.open(os.path.join(SK, "library", "index.json"), "w", encoding="utf-8", newline="\n").write(
     json.dumps({"verified": "2026-10-01", "entries": entries}, indent=2, ensure_ascii=False) + "\n")
@@ -116,7 +118,7 @@ def md_index(for_skill):
         ("Marketing flourishes", "Magic UI (free, MIT) on an island", "Motion Primitives patterns; retrofit reduced motion"),
         ("Icons", "Lucide via @lucide/astro or astro-icon", "Tabler for gaps; Iconoir for finer strokes"),
         ("Charts (any platform)", "Chart.js", "ECharts for dashboards/maps; Bklit or visx on React islands"),
-        ("Carousel", "CSS scroll-snap row (patterns.md 12)", "Embla once 9.0 stable ships; Swiper 14 only if the operator approves its index entry"),
+        ("Carousel", "CSS scroll-snap row (patterns.md 12)", "Swiper 14 for looping, thumbnails or effects (budget: about 25 KB); Embla once 9.0 stable ships"),
         ("Lottie animation", "Muted video loop", "dotLottie player, lazy-loaded below the fold"),
     ]:
         w(f"| {need} | {first} | {then} |")

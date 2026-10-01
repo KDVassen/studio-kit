@@ -10,7 +10,7 @@ This repository is one client's website, built by the studio from studio-kit. Se
 - Tailwind v4 + daisyUI for styling; the client's theme lives in `src/styles/global.css`.
 - Every client fact lives in `src/site.config.ts`. Components never hard-code names, contact details, prices or dates.
 - Hosting: **Cloudflare Workers with static assets**. The enquiry form posts to `worker/index.ts`, which stores enquiries in **D1** and purges old data daily.
-- **Content Security Policy is on:** no inline `style=""` attributes and no `'unsafe-inline'`. A React island costs about 68 KB of runtime, which needs the operator's budget exception.
+- **Content Security Policy is on:** no inline `style=""` attributes and no `'unsafe-inline'`. A React island costs about 68 KB of runtime: per decision D14 it needs the operator's approval for that page first, recorded in PROJECT.md.
 
 ## Hard rules (full list: studio-kit `references/rules.md`)
 
