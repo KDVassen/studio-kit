@@ -1,0 +1,48 @@
+{
+  "agent": "site-builder",
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(npm i *)",
+      "Bash(npm ci *)",
+      "Bash(npm ls *)",
+      "Bash(npx astro *)",
+      "Bash(npx wrangler dev *)",
+      "Bash(npx wrangler d1 execute * --local *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git switch *)",
+      "Bash(git checkout -b *)",
+      "Bash(git branch *)",
+      "Bash(git stash *)",
+      "Bash(python scripts/notices.py)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(gh repo create *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr merge *)",
+      "Bash(npx wrangler deploy *)",
+      "Bash(wrangler deploy *)",
+      "Bash(npx wrangler versions *)",
+      "Bash(npx wrangler login *)",
+      "Bash(npx wrangler secret *)",
+      "Bash(npx wrangler d1 create *)",
+      "Bash(npx wrangler d1 execute * --remote *)",
+      "Bash(npx wrangler d1 migrations apply * --remote *)"
+    ],
+    "deny": [
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push * --force*)",
+      "Bash(npx wrangler d1 delete *)",
+      "Bash(npx wrangler delete *)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(!.env.example)",
+      "Read(./.dev.vars)"
+    ]
+  }
+}

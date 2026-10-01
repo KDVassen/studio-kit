@@ -1,0 +1,18 @@
+---
+import { site } from '../site.config';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 bg-neutral text-neutral-content">
+  <div class="wrap flex flex-wrap items-end justify-between gap-6 py-10">
+    <div class="space-y-1 text-sm">
+      <p class="text-base font-bold">{site.name}</p>
+      <p>{site.legalName}</p>
+      <p>Information Officer: {site.privacy.infoOfficer}</p>
+    </div>
+    <div class="text-sm sm:text-right">
+      <p><a href="/privacy/" class="inline-flex min-h-11 items-center text-neutral-content underline">How we handle your details</a></p>
+      <p>© {year}</p>
+    </div>
+  </div>
+</footer>

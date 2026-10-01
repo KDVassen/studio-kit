@@ -1,0 +1,170 @@
+[
+  {
+    "upstream": "juliangarnier/anime",
+    "fork": "KDVassen/anime",
+    "library": "anime.js v4",
+    "licence": "MIT",
+    "modified": false,
+    "note": "Existing fork; sync, don't re-fork."
+  },
+  {
+    "upstream": "formkit/auto-animate",
+    "fork": "KDVassen/auto-animate",
+    "library": "AutoAnimate",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "BabylonJS/Babylon.js",
+    "fork": "KDVassen/Babylon.js",
+    "library": "Babylon.js",
+    "licence": "Apache-2.0",
+    "modified": false,
+    "note": "Apache-2.0: keep NOTICE, mark changed files."
+  },
+  {
+    "upstream": "hunvreus/basecoat",
+    "fork": "KDVassen/basecoat",
+    "library": "Basecoat",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "mui/base-ui",
+    "fork": "KDVassen/base-ui",
+    "library": "Base UI",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "bklit/bklit-ui",
+    "fork": "KDVassen/bklit-ui",
+    "library": "Bklit UI",
+    "licence": "MIT (charts); Studio is proprietary",
+    "modified": false,
+    "note": "Never use code under LICENSE-STUDIO.md (proprietary Studio)."
+  },
+  {
+    "upstream": "chartjs/Chart.js",
+    "fork": "KDVassen/Chart.js",
+    "library": "Chart.js",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "saadeghi/daisyui",
+    "fork": "KDVassen/daisyui",
+    "library": "daisyUI",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "apache/echarts",
+    "fork": "KDVassen/echarts",
+    "library": "Apache ECharts",
+    "licence": "Apache-2.0",
+    "modified": false,
+    "note": "Apache-2.0: keep NOTICE, mark changed files."
+  },
+  {
+    "upstream": "darkroomengineering/lenis",
+    "fork": "KDVassen/lenis",
+    "library": "Lenis",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "lucide-icons/lucide",
+    "fork": "KDVassen/lucide",
+    "library": "Lucide",
+    "licence": "ISC, plus MIT for Feather-derived icons",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "magicuidesign/magicui",
+    "fork": "KDVassen/magicui",
+    "library": "Magic UI (free)",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "motiondivision/motion",
+    "fork": "KDVassen/motion",
+    "library": "Motion",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "barvian/number-flow",
+    "fork": "KDVassen/number-flow",
+    "library": "Number Flow",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "pmndrs/react-three-fiber",
+    "fork": "KDVassen/react-three-fiber",
+    "library": "React Three Fiber + drei",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "pmndrs/drei",
+    "fork": "KDVassen/drei",
+    "library": "React Three Fiber + drei",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "adobe/react-spectrum",
+    "fork": "KDVassen/react-spectrum",
+    "library": "React Aria Components",
+    "licence": "Apache-2.0",
+    "modified": false,
+    "note": "Apache-2.0: keep NOTICE, mark changed files."
+  },
+  {
+    "upstream": "shadcn-ui/ui",
+    "fork": "KDVassen/ui",
+    "library": "shadcn/ui",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "tabler/tabler-icons",
+    "fork": "KDVassen/tabler-icons",
+    "library": "Tabler Icons",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "mrdoob/three.js",
+    "fork": "KDVassen/three.js",
+    "library": "three.js",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  },
+  {
+    "upstream": "airbnb/visx",
+    "fork": "KDVassen/visx",
+    "library": "visx",
+    "licence": "MIT",
+    "modified": false,
+    "note": ""
+  }
+]

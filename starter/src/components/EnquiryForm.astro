@@ -1,0 +1,136 @@
+---
+// HUMAN REVIEW GATE: this form collects personal information. Any change to this file or to
+// worker/index.ts must be shown to the operator line by line before deploying (client-build rule 11).
+import { site } from '../site.config';
+const { retentionMonths, responseTime } = site.privacy;
+---
+
+<form class="enquiry space-y-5" method="post" action="/api/enquiry" data-response-time={responseTime}>
+  <p class="enq-summary hidden rounded-box border border-error p-3 text-sm" role="alert" tabindex="-1"></p>
+
+  <div>
+    <label for="enq-name" class="block font-semibold">Your name <span class="font-normal faint">(required)</span></label>
+    <input id="enq-name" name="name" type="text" autocomplete="name" required maxlength="100"
+      aria-describedby="enq-name-err" class="input mt-1 w-full min-h-12" />
+    <p id="enq-name-err" class="field-error mt-1 text-sm text-error" hidden></p>
+  </div>
+
+  <div>
+    <label for="enq-email" class="block font-semibold">Your email <span class="font-normal faint">(required)</span></label>
+    <p id="enq-email-hint" class="text-sm faint">So we can reply.</p>
+    <input id="enq-email" name="email" type="email" autocomplete="email" required maxlength="254"
+      aria-describedby="enq-email-hint enq-email-err" class="input mt-1 w-full min-h-12" />
+    <p id="enq-email-err" class="field-error mt-1 text-sm text-error" hidden></p>
+  </div>
+
+  <div>
+    <label for="enq-business" class="block font-semibold">Your business <span class="font-normal faint">(optional)</span></label>
+    <input id="enq-business" name="business" type="text" autocomplete="organization" maxlength="120"
+      class="input mt-1 w-full min-h-12" />
+  </div>
+
+  <div>
+    <label for="enq-message" class="block font-semibold">What do you need? <span class="font-normal faint">(required)</span></label>
+    <p id="enq-message-hint" class="text-sm faint">A few sentences is plenty. Please don't include health or medical details.</p>
+    <textarea id="enq-message" name="message" required minlength="10" maxlength="2000" rows="5"
+      aria-describedby="enq-message-hint enq-message-err" class="textarea mt-1 w-full"></textarea>
+    <p id="enq-message-err" class="field-error mt-1 text-sm text-error" hidden></p>
+  </div>
+
+  <!-- Honeypot: hidden from people and assistive tech; bots fill it in. A deliberately meaningless name,
+       so password managers and address autofill have nothing to match. -->
+  <div class="vh" aria-hidden="true">
+    <label for="enq-hp">Leave this field empty</label>
+    <input id="enq-hp" name="hp_x7" type="text" tabindex="-1" autocomplete="off" />
+  </div>
+  <!-- Milliseconds the page was open before sending, measured by this browser's own monotonic clock. -->
+  <input type="hidden" name="elapsed" value="" />
+
+  <p class="text-sm muted prose-width">
+    We use your name, email and message only to reply to you and, if we work together, to run the project.
+    They are stored on Cloudflare's servers outside South Africa and deleted after {retentionMonths} months
+    if we don't work together. <a href="/privacy/">How we handle your details</a>
+  </p>
+
+  <button type="submit" class="btn btn-primary min-h-12">Send enquiry</button>
+  <p class="enq-status text-sm" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  // Progressive enhancement. Without JavaScript the form posts natively and the Worker answers with a page.
+  const form = document.querySelector<HTMLFormElement>('form.enquiry');
+  if (form && 'fetch' in window) {
+    form.noValidate = true;
+    const loadedAt = performance.now();
+    const elapsed = form.querySelector<HTMLInputElement>('input[name="elapsed"]')!;
+    const status = form.querySelector<HTMLElement>('.enq-status')!;
+    const summary = form.querySelector<HTMLElement>('.enq-summary')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const responseTime = form.dataset.responseTime ?? '';
+    let sending = false;
+
+    const clear = () => {
+      summary.classList.add('hidden'); summary.textContent = '';
+      form.querySelectorAll<HTMLElement>('.field-error').forEach((p) => { p.hidden = true; p.textContent = ''; });
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+    };
+
+    const validate = () => {
+      const data = new FormData(form);
+      const errors: Record<string, string> = {};
+      const email = String(data.get('email') ?? '').trim();
+      if (!String(data.get('name') ?? '').trim()) errors.name = 'Add your name.';
+      if (!email) errors.email = 'Add an email address so we can reply.';
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = 'Enter an email address like name@example.com.';
+      if (String(data.get('message') ?? '').trim().length < 10) errors.message = 'Tell us a little about what you need (at least 10 characters).';
+      return errors;
+    };
+
+    const show = (errors: Record<string, string>) => {
+      const fields = Object.keys(errors);
+      for (const f of fields) {
+        const input = form.querySelector<HTMLElement>(`[name="${f}"]`);
+        const err = form.querySelector<HTMLElement>(`#enq-${f}-err`);
+        input?.setAttribute('aria-invalid', 'true');
+        if (err) { err.textContent = errors[f]; err.hidden = false; }
+      }
+      // Reveal first, then set the text on the next frame so screen readers announce it, even when unchanged.
+      summary.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        summary.textContent = fields.length === 1 ? 'One thing needs fixing before this can send.' : `${fields.length} things need fixing before this can send.`;
+      });
+      form.querySelector<HTMLElement>(`[name="${fields[0]}"]`)?.focus();
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      clear();
+      const errors = validate();
+      if (Object.keys(errors).length) { show(errors); return; }
+      elapsed.value = String(Math.round(performance.now() - loadedAt));
+      // aria-disabled, not disabled: disabling the focused button would drop keyboard focus to the page.
+      sending = true; button.setAttribute('aria-disabled', 'true');
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        const body = await res.json().catch(() => ({}));
+        if (res.ok && body.ok) {
+          form.reset();
+          status.textContent = responseTime ? `Sent. We'll reply within ${responseTime}.` : 'Sent. We will reply soon.';
+        } else if (body.errors) {
+          status.textContent = '';
+          show(body.errors);
+        } else {
+          status.textContent = res.status === 429
+            ? 'Too many messages in a short time. Please try again in a few minutes.'
+            : "That didn't send. Please try again, or use WhatsApp or email.";
+        }
+      } catch {
+        status.textContent = "That didn't send. Check your connection and try again, or use WhatsApp or email.";
+      } finally {
+        sending = false; button.removeAttribute('aria-disabled');
+      }
+    });
+  }
+</script>

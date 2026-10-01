@@ -1,0 +1,26 @@
+---
+import { site } from '../site.config';
+// Sticky only from the sm breakpoint up: on phones a wrapped sticky header can cover focused
+// content (WCAG 2.4.11). The header CTA is hidden on phones, where the hero's own CTA sits directly
+// below; that keeps the tab order identical to the visual order at every width.
+---
+
+<header class="border-b border-base-300 bg-base-100 sm:sticky sm:top-0 sm:z-40">
+  <div class="wrap flex flex-wrap items-center gap-x-6 gap-y-1 py-3 sm:min-h-[4.5rem]">
+    <a href="/" class="inline-flex min-h-11 items-center text-lg font-bold tracking-tight text-base-content no-underline">
+      {site.name}
+    </a>
+    <nav aria-label="Primary" class="w-full sm:w-auto sm:flex-1">
+      <ul role="list" class="flex flex-wrap gap-x-1">
+        {site.nav.map((item) => (
+          <li>
+            <a href={item.href} class="inline-flex min-h-11 items-center px-2 text-[15px] no-underline muted hover:text-base-content">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a href="/#contact" class="btn btn-primary hidden min-h-11 sm:inline-flex">Get in touch</a>
+  </div>
+</header>

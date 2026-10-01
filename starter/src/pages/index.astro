@@ -1,0 +1,94 @@
+---
+// Starter homepage. Every [PLACEHOLDER] comes from site.config.ts or is marked inline for the builder to replace.
+// No invented reviews, client names, logos or statistics: the reviews section ships as a designed empty state.
+import Base from '../layouts/Base.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import { ChevronDown, Mail, MessageCircle } from '@lucide/astro';
+import { site } from '../site.config';
+
+const { whatsapp, whatsappDisplay, email, emailDisplay } = site.contact;
+const services = [
+  { title: '[SERVICE 1]', body: '[What the customer gets, in their words. One or two sentences.]' },
+  { title: '[SERVICE 2]', body: '[What the customer gets, in their words. One or two sentences.]' },
+  { title: '[SERVICE 3]', body: '[What the customer gets, in their words. One or two sentences.]' },
+];
+const faqs = [
+  { q: '[QUESTION CUSTOMERS ACTUALLY ASK]', a: '[Plain answer.]' },
+  { q: '[QUESTION ABOUT PRICE, AREA OR TIMING]', a: '[Plain answer.]' },
+];
+---
+
+<Base>
+  <section aria-labelledby="hero-h" class="wrap py-20 sm:py-28">
+    <h1 id="hero-h" class="max-w-[20ch] text-4xl font-bold tracking-tight sm:text-6xl">{site.tagline}</h1>
+    <p class="mt-6 max-w-[58ch] text-lg muted sm:text-xl">[One or two sentences: who this business helps, with what, and where.]</p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="#contact" class="btn btn-primary min-h-12">Get in touch</a>
+      <a href="#services" class="btn btn-outline min-h-12">See what we do</a>
+    </div>
+  </section>
+
+  <section id="services" aria-labelledby="services-h" class="border-y border-base-300 bg-base-200 py-20">
+    <div class="wrap">
+      <h2 id="services-h" class="text-3xl font-semibold tracking-tight">What we do</h2>
+      {/* data-reveal animates these cards in. Never put it on anything showing a price: displayed prices must render immediately. */}
+      <ul role="list" class="mt-10 grid gap-8 sm:grid-cols-3">
+        {services.map((s) => (
+          <li data-reveal class="border-t-2 border-base-content pt-5">
+            <h3 class="text-xl font-semibold">{s.title}</h3>
+            <p class="mt-2 muted">{s.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h" class="wrap py-20">
+    <h2 id="about-h" class="text-3xl font-semibold tracking-tight">About {site.name}</h2>
+    <p class="mt-6 prose-width text-lg muted">[Who runs the business, how long, and why a customer should trust them. Real facts only.]</p>
+  </section>
+
+  <section aria-labelledby="reviews-h" class="border-y border-base-300 bg-base-200 py-16">
+    <div class="wrap">
+      <h2 id="reviews-h" class="text-2xl font-semibold tracking-tight">What customers say</h2>
+      <p class="mt-4 prose-width muted">
+        Reviews will appear here once customers have agreed to share them.
+      </p>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-h" class="wrap py-20">
+    <h2 id="faq-h" class="text-3xl font-semibold tracking-tight">Questions</h2>
+    <div class="mt-8 prose-width">
+      {faqs.map((f, i) => (
+        <details class="border-t border-base-300 py-4 last:border-b" open={i === 0}>
+          <summary class="flex min-h-11 cursor-pointer items-center gap-3 text-lg font-semibold">{f.q}<ChevronDown class="sk-chevron" size={20} aria-hidden="true" /></summary>
+          <p class="mt-2 muted">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h" class="border-t border-base-300 bg-base-200 py-20">
+    <div class="wrap grid gap-12 lg:grid-cols-2">
+      <div>
+        <h2 id="contact-h" class="text-3xl font-semibold tracking-tight">Get in touch</h2>
+        <p class="mt-4 muted">Tell us what you need. That's enough to start.</p>
+        <ul role="list" class="mt-8 space-y-1">
+          <li>
+            {whatsapp
+              ? <a href={`https://wa.me/${whatsapp}`} class="inline-flex min-h-12 items-center gap-3 font-semibold no-underline"><MessageCircle size={20} aria-hidden="true" /> WhatsApp {whatsappDisplay}</a>
+              : <span class="inline-flex min-h-12 items-center gap-3 font-semibold"><MessageCircle size={20} aria-hidden="true" /> WhatsApp {whatsappDisplay}</span>}
+          </li>
+          <li>
+            {email
+              ? <a href={`mailto:${email}`} class="inline-flex min-h-12 items-center gap-3 font-semibold no-underline"><Mail size={20} aria-hidden="true" /> {emailDisplay}</a>
+              : <span class="inline-flex min-h-12 items-center gap-3 font-semibold"><Mail size={20} aria-hidden="true" /> {emailDisplay}</span>}
+          </li>
+        </ul>
+        <p class="mt-6 text-sm muted">{site.hours} · {site.area}</p>
+      </div>
+      <EnquiryForm />
+    </div>
+  </section>
+</Base>

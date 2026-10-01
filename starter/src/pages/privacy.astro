@@ -1,0 +1,45 @@
+---
+// POPIA s18 notice skeleton. Every item below is required before or at collection.
+// Draft only: the client is the responsible party and should have it reviewed. Not legal advice.
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config';
+const p = site.privacy;
+---
+
+<Base title="How we handle your details" description={`How ${site.name} collects, uses and protects your personal information.`}>
+  <article class="wrap py-20">
+    <h1 class="text-4xl font-bold tracking-tight">How we handle your details</h1>
+    <div class="mt-8 prose-width space-y-6 muted">
+      <section aria-labelledby="pv-who">
+        <h2 id="pv-who" class="text-xl font-semibold text-base-content">Who we are</h2>
+        <p>{site.legalName}, {site.address}. Information Officer: {p.infoOfficer}.</p>
+      </section>
+      <section aria-labelledby="pv-what">
+        <h2 id="pv-what" class="text-xl font-semibold text-base-content">What we collect, and why</h2>
+        <p>When you use the enquiry form we collect your name, your email address, your business name if you give it, and your message. We use them only to reply to you and, if we work together, to run that work. We never add your address to a mailing list or share it for marketing.</p>
+        <p>Giving us these details is voluntary. If you would rather not, you can reach us by WhatsApp or email instead; we just can't reply to a form we haven't received.</p>
+        <p>Please don't send health or medical information through the form.</p>
+      </section>
+      <section aria-labelledby="pv-where">
+        <h2 id="pv-where" class="text-xl font-semibold text-base-content">Where it is stored</h2>
+        <p>This website and its form are run on servers outside South Africa by:</p>
+        <ul class="list-disc pl-6">{p.offshoreVendors.map((v) => <li>{v}</li>)}</ul>
+        <p>These providers process the information under written agreements that require them to keep it secure. [STATE THE BASIS: a binding agreement under POPIA section 72(1)(a).]</p>
+        <p>To limit abuse of the form, we briefly keep a scrambled code derived from the sender's internet address, and delete it within a day.</p>
+      </section>
+      <section aria-labelledby="pv-keep">
+        <h2 id="pv-keep" class="text-xl font-semibold text-base-content">How long we keep it</h2>
+        <p>If we don't end up working together, we delete your enquiry after {p.retentionMonths} months.</p>
+      </section>
+      <section aria-labelledby="pv-rights">
+        <h2 id="pv-rights" class="text-xl font-semibold text-base-content">Your rights</h2>
+        <p>You can ask what information we hold about you, ask us to correct or delete it, or object to how we use it. Contact our Information Officer: {p.infoOfficer}.</p>
+        <p>If you're unhappy with how we handle your information, you can complain to the Information Regulator (South Africa): <a href="https://inforegulator.org.za">inforegulator.org.za</a>.</p>
+      </section>
+      <section aria-labelledby="pv-cookies">
+        <h2 id="pv-cookies" class="text-xl font-semibold text-base-content">Cookies and analytics</h2>
+        <p>This site sets no cookies. [IF ANALYTICS IS ON:] We count visits with Cloudflare Web Analytics, which does not use cookies or track you across sites.</p>
+      </section>
+    </div>
+  </article>
+</Base>

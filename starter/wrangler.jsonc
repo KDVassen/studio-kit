@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // Rename per client; this becomes the staging hostname <name>.<account>.workers.dev.
+  "name": "client-site",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-30",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "enquiries",
+      // Placeholder. Create the real database per client (operator approves): npx wrangler d1 create <client>-enquiries
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  // Daily housekeeping at 03:00 UTC: deletes rate records older than a day and enquiries past retention.
+  "triggers": { "crons": ["0 3 * * *"] },
+  // Errors are logged; per-request invocation logs are off so visitor IP addresses aren't kept in logs.
+  "observability": {
+    "enabled": true,
+    "logs": { "invocation_logs": false }
+  }
+}

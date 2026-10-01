@@ -1,0 +1,3 @@
+# Copy to .dev.vars for local development (`npm run worker:dev`). .dev.vars is git-ignored.
+# Production uses a real secret instead: npx wrangler secret put RATE_SALT
+RATE_SALT=local-development-only

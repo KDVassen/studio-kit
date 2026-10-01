@@ -1,0 +1,10 @@
+node_modules/
+starter/dist/
+starter/.astro/
+starter/.wrangler/
+starter/.env
+starter/.env.*
+starter/.dev.vars
+__pycache__/
+*.pyc
+.DS_Store

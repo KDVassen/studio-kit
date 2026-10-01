@@ -1,0 +1,13 @@
+---
+// Shown after a successful enquiry when JavaScript is off (the Worker redirects here).
+import Base from '../layouts/Base.astro';
+import { site } from '../site.config';
+---
+
+<Base title="Enquiry sent" noindex>
+  <section class="wrap py-24">
+    <h1 class="text-4xl font-bold tracking-tight">Thanks, your enquiry was sent</h1>
+    <p class="mt-6 prose-width text-lg muted">We'll reply within {site.privacy.responseTime}.</p>
+    <p class="mt-8"><a href="/" class="btn btn-outline min-h-12">Back to the home page</a></p>
+  </section>
+</Base>
