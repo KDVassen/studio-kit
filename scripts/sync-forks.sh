@@ -30,7 +30,7 @@ done < <(python -c "
 import json
 for f in json.load(open(r'$KIT/forks.json')):
     print(f['fork'], f['upstream'], f.get('modified', False), sep='\t')
-")
+" | tr -d '\r')
 
 echo
 echo "**$ok synced, $skipped skipped, $failed failed.**"
