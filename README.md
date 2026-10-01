@@ -2,7 +2,7 @@
 
 The studio's toolkit for building client websites: a vetted library index, a hardened Astro starter, a client-repo template, the **site-builder** agent with four helpers, and the forks kept under `github.com/KDVassen`.
 
-Private. Decisions behind it: knowledge-base files `17-libraries_review-list.md` and `18-studio-kit_builder-2026-10-01.md` (D12, D13).
+Public at github.com/KDVassen/studio-kit. Decisions behind it: knowledge-base files `17-libraries_review-list.md` and `18-studio-kit_builder-2026-10-01.md` (D12, D13).
 
 ## What's here
 
