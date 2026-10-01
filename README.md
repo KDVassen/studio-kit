@@ -29,7 +29,7 @@ Then start a new Claude Code session so the skill and agents load.
 
 ## Start a client site
 
-Open a session as the builder, from any folder:
+In the Claude desktop app, open a new session in `Code Projects/Websites/clients/`: its settings start the session as the builder. From a terminal with the `claude` CLI, run:
 
 ```bash
 claude --agent site-builder
